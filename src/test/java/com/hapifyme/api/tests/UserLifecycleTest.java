@@ -22,7 +22,7 @@ public class UserLifecycleTest {
     private final String password = "Test1234!";
     private String apiKey;
     private String userid;
-    private String usermane;
+    private String username;
     private String bearerToken;
 
     @Test (priority = 1)
@@ -52,8 +52,8 @@ public class UserLifecycleTest {
 
         apiKey = response.getApiKey();
         userid = response.getUserId();
-        usermane = response.getUsername();
-        System.out.println("User created with: \n ID: " + userid + " \n username: " + usermane + "\n api key: " + apiKey );
+        username = response.getUsername();
+        System.out.println("User created with: \n ID: " + userid + " \n username: " + username + "\n api key: " + apiKey );
 
         String statusUrl = ConfigManager.CONFIRM_STATUS + email;
         ApiPoller.pollForStatus(
@@ -88,7 +88,7 @@ public class UserLifecycleTest {
         System.out.println("\n Step 3");
         System.out.println("Logging in the system with user: " + email + " and password: " + password);
 
-        LoginRequest loginBody = new LoginRequest(usermane, password);
+        LoginRequest loginBody = new LoginRequest(username, password);
         LoginResponse loginResponse =
                  given()
                         .baseUri(ConfigManager.BASE_URL)
@@ -124,7 +124,7 @@ public class UserLifecycleTest {
                 .statusCode(200)
                 .body("status", equalTo("success"))
                 .body("user.email", equalTo(email))
-                .body("user.username", equalTo(usermane))
+                .body("user.username", equalTo(username))
                 .body("user.id", equalTo(userid));
                 //.log().all();
 
