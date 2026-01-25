@@ -10,7 +10,6 @@ public class BaseTest {
     @BeforeClass
     public void setup() {
          requestSpec = new RequestSpecBuilder()
-                .setBaseUri("https://test.hapifyme.com/api")
                 .setContentType("application/json")
                 .addHeader("Accept", "application/json")
                 .build();
